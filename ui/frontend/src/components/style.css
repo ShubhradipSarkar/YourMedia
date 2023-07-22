@@ -1,0 +1,15 @@
+.nav{
+    color: blue;
+    border-radius: 10px;
+    width: 15px;
+    padding: 10px;
+    box-shadow: 2px;
+    
+  }
+
+  .people{
+    border: 2px solid black;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+  }
