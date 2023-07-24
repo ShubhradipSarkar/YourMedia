@@ -11,11 +11,14 @@ function Navbar1(){
         <Container>
           <Navbar.Brand href="#home">Be Social</Navbar.Brand>
           <Nav className="me-auto">
+            <Nav.Link href="/" className="nav">Feed</Nav.Link>
             <Nav.Link href="locals" className="nav">Locals</Nav.Link>
             <Nav.Link href="friends" className="nav">Search Friends</Nav.Link>
-            <Nav.Link href="yourconnections" className="nav">Your Friends</Nav.Link>
+            {/* <Nav.Link href="yourconnections" className="nav">Your Friends</Nav.Link> */}
             <Nav.Link href="suggestions" className="nav">Friends suggestions</Nav.Link>
             <Nav.Link href="friendrequests" className="nav">Friend Requests</Nav.Link>
+            <Nav.Link href="test" className="nav">See Friends Activities</Nav.Link>
+            <Nav.Link href="postWhatsinMind" className="nav">Post Something</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

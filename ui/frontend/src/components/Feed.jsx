@@ -9,15 +9,11 @@ function Feed(){
     return(
         <div>
             <Navbar1/>
-            This is the Feed
-            <div>
-      <h1>
-        Example heading
-        <Badge bg="secondary" as={Button}>
-          New
-        </Badge>
-      </h1>
-    </div>
+            <h3>Check current News Feed</h3>
+            {/* <form onSubmit={handleSubmit}>
+                <input type="text" value={id} onChange={handleInputChange} placeholder="Enter ID" />
+                <button type="submit">Load his informations</button>
+            </form> */}
         </div>
     )
 }

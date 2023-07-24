@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from friends.models import User,Friends
+from friends.models import User,Friends,Posts
 
 class Userserializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -12,3 +12,7 @@ class Friendserializer(serializers.HyperlinkedModelSerializer):
         model = Friends
         fields="__all__"
         
+class Postsserializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model=Posts
+        fields='__all__'

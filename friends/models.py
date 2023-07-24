@@ -16,7 +16,11 @@ class Friends(models.Model):
     self_id=models.IntegerField(null=True,blank=True)
     friend_id=models.IntegerField(null=True,blank=True)
 
-
+class Posts(models.Model):
+    #post_id=models.IntegerField(null=True,blank=True)
+    self_id=models.IntegerField(null=True,blank=True)
+    #user_id=models.ForeignKey(User, on_delete=models.CASCADE)
+    quote=models.CharField(max_length=500)
 
     
 

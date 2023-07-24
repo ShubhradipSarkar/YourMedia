@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from friends.models import User,Friends
+from friends.models import User,Friends,Posts
 from rest_framework import viewsets
-from friends.serializers import Userserializer,Friendserializer
+from friends.serializers import Userserializer,Friendserializer,Postsserializer
 
 import requests
 
@@ -46,3 +46,34 @@ class FriendsViewSet(viewsets.ModelViewSet):
     queryset=Friends.objects.all()
     serializer_class=Friendserializer 
 
+class PostsViewSet(viewsets.ModelViewSet):
+     
+    queryset=Posts.objects.all()
+    serializer_class=Postsserializer 
+
+def get_user_by_id(request, user_id):
+    try:
+        man = User.objects.get(pk=user_id)
+        data = {
+            "user_name": man.user_name,
+            "about": man.about,
+            
+            # Add other fields as needed
+        }
+        return JsonResponse(data)
+    except User.DoesNotExist:
+        return JsonResponse({"error": "man not found"}, status=404)
+        
+# def get_post_by_id(request, self_id):
+#     try:
+#         post = Posts.objects.get(pk=self_id)
+#         data = {
+            
+#             "user_name": post.user_name,
+#             "quote": post.quote,
+            
+#             # Add other fields as needed
+#         }
+#         return JsonResponse(data)
+#     except User.DoesNotExist:
+#         return JsonResponse({"error": "post not found"}, status=404)

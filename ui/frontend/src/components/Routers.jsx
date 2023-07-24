@@ -7,6 +7,8 @@ import Locals from './Locals'
 import Suggestions from './Suggestions'
 import Feed from './Feed'
 import Friends from './Friends'
+import Test from './Test'
+import Post from './Post'
 
 function Uapp(){
     return(
@@ -19,7 +21,9 @@ function Uapp(){
                 <Route  path='/friendrequests' element={<Friend_requests/>}/>
                 <Route  path='/locals' element={<Locals/>}/>
                 <Route  path='/suggestions' element={<Suggestions/>}/>
-                <Route  path='/yourconnections' element={<Friends/>}/>
+                {/* <Route  path='/yourconnections' element={<Friends/>}/> */}
+                <Route  path='/test' element={<Test/>}/>
+                <Route  path='/postWhatsinMind' element={<Post/>}/>
                 
             </Routes>
             

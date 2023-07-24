@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar1 from './Navbar';
 import './style.css';
+import Button from 'react-bootstrap/esm/Button';
+import ApiButton from './ApiButton';
 
 function Locals() {
+  
   const [details, setDetails] = useState([]);
 
   useEffect(() => {
@@ -27,6 +30,8 @@ function Locals() {
             <h2>{output.user_name}</h2>
             <h4>{output.about}</h4>
           </div>
+          
+          <ApiButton friendId={id}/>
         </div>
       ))}
     </div>

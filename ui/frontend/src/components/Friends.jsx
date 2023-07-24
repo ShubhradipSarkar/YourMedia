@@ -3,6 +3,8 @@ import axios from 'axios';
 import React from "react"
 import Navbar1 from "./Navbar"
 
+let filteredData
+
 function Locals(){
     const [id, setId] = useState('');
     const [responseData, setResponseData] = useState([]);
@@ -28,7 +30,7 @@ function Locals(){
     };
     console.log(id)
 
-    const filteredData = responseData.filter(obj => obj.self_id === parseInt(id)).map(obj=>obj.friend_id);
+    filteredData = responseData.filter(obj => obj.self_id === parseInt(id)).map(obj=>obj.friend_id);
 
     console.log('filtered')
     console.log(filteredData)
@@ -47,7 +49,10 @@ function Locals(){
         const fetchRamAgesData = async () => {
           try {
             const promises = filteredData.map(async age => {
-                
+                console.log('age = ')
+                console.log(age)
+                console.log(`http://127.0.0.1:8000/api/v1/Userss/${age}`)
+                //console.log(`http://127.0.0.1:8000/api/v1/Userss/${dogId}/`)
               const response = await axios.get(`http://127.0.0.1:8000/api/v1/Userss/${age}`);
               return response.data;
             });
@@ -90,4 +95,4 @@ function Locals(){
         </div>
     )
 }
-export default Locals
+export default filteredData
