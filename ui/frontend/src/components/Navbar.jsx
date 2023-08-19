@@ -5,6 +5,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import './style.css'
 
 function Navbar1(){
+  const name=localStorage.getItem('userName');
+
     return(
         <>
         <Navbar bg="light" data-bs-theme="light">
@@ -21,6 +23,7 @@ function Navbar1(){
             <Nav.Link href="postWhatsinMind" className="nav">Post Something</Nav.Link>
             <Nav.Link href="primaryinfo" className="nav">Update profile</Nav.Link>
             <Nav.Link href="logout" className="nav">Log out</Nav.Link>
+            <h3>{name}</h3>
           </Nav>
         </Container>
       </Navbar>

@@ -32,7 +32,7 @@ const RequestEntry = ({id , entry }) => {
           {/* Add more fields here */}
 
           
-          <AcceptButton deleteRequestId={id} friendId={entry.request_from} message={message}/>
+          <AcceptButton deleteRequest={id} friendId={entry.request_from} message={message}/>
         </div>
       )}
     </div>

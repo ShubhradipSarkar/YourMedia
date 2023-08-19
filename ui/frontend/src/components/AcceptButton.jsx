@@ -10,6 +10,7 @@ const AcceptButton = ({deleteRequest, friendId, message}) => {
   const myId=localStorage.getItem('userId');
   //console.log('myid = '+myId);
   const SuccessMsg=message;
+  console.log('delete delete delete = '+deleteRequest);
   console.log('the msg = '+SuccessMsg);
 console.log(errMsg);
   const handleApiCall = async () => {
@@ -34,7 +35,8 @@ console.log(errMsg);
       }, 3000); // 3000 milliseconds = 3 seconds
 
     //   console.log('deleted = '+deleteRequest);
-    //   await axios.delete(`http://127.0.0.1:8000/api/v1/SearchView/${deleteRequest}`);
+      console.log('delete id = '+deleteRequest)
+      await axios.delete(`http://127.0.0.1:8000/api/v1/friendRequest/${deleteRequest}/`);
 
     } catch (error) {
       console.error(error);

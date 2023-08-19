@@ -36,6 +36,8 @@ const Primaryinfo = () => {
         console.log(response);
         //navigate('/login');
           //setResponseData(response.data);
+          // const res=axios.get(`http://127.0.0.1:8000/api/v1/Userss/${myId}/`)
+          // localStorage.setItem('userName',res.data.user_name);
       })
       .catch(error => {
           console.log('huihui');

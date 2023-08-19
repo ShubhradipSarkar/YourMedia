@@ -49,7 +49,7 @@ const ApiButton = ({friendId}) => {
         onChange={(e) => setFriendId(e.target.value)}
       /> */}
       <button onClick={handleApiCall}>Add Friend</button>
-      <div className={errMsg === 'Added as friend' ? 'green-success' : 'red-error'}>{errMsg}</div>
+      <div className={errMsg === 'Friend Request Sent...' ? 'green-success' : 'red-error'}>{errMsg}</div>
       
     </div>
   );
