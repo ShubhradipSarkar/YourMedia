@@ -24,6 +24,11 @@ class Friends(models.Model):
     self_id=models.IntegerField(null=True,blank=True)
     pika=models.IntegerField(null=True)
     friend_id=models.IntegerField(null=True,blank=True)
+    class Meta:
+        unique_together = ('self_id', 'friend_id')
+        constraints = [
+            models.CheckConstraint(check=~models.Q(self_id=models.F('friend_id')), name='not_equal_value')
+        ]
 
 class FriendRequests(models.Model):
     request_from = models.IntegerField()
