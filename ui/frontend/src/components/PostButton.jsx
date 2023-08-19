@@ -6,12 +6,12 @@ const ApiButton = ({friendId,text}) => {
   const [selfId, setSelfId] = useState('');
   const [thoughts, setThoughts] = useState('');
   const [status, setStatus] = useState('');
-
+  const myId=localStorage.getItem('userId');
 
   const handleApiCall = async () => {
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/v1/Posts/', {
-        self_id: selfId,
+        self_id: myId,
         quote: thoughts,
       });
       setStatus('Posted successfully');
@@ -24,12 +24,12 @@ const ApiButton = ({friendId,text}) => {
 
   return (
     <div>
-      <input
+      {/* <input
         type="text"
         placeholder="Self ID"
         value={selfId}
         onChange={(e) => setSelfId(e.target.value)}
-      />
+      /> */}
       <input
         type="text"
         placeholder="Write something"

@@ -11,7 +11,7 @@ function Navbar1(){
         <Container>
           <Navbar.Brand href="#home">Be Social</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="/" className="nav">Feed</Nav.Link>
+            <Nav.Link href="Feed" className="nav">Feed</Nav.Link>
             <Nav.Link href="locals" className="nav">Locals</Nav.Link>
             <Nav.Link href="friends" className="nav">Search Friends</Nav.Link>
             {/* <Nav.Link href="yourconnections" className="nav">Your Friends</Nav.Link> */}
@@ -19,6 +19,8 @@ function Navbar1(){
             <Nav.Link href="friendrequests" className="nav">Friend Requests</Nav.Link>
             <Nav.Link href="test" className="nav">See Friends Activities</Nav.Link>
             <Nav.Link href="postWhatsinMind" className="nav">Post Something</Nav.Link>
+            <Nav.Link href="primaryinfo" className="nav">Update profile</Nav.Link>
+            <Nav.Link href="logout" className="nav">Log out</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

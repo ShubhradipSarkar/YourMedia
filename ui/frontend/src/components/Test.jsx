@@ -113,7 +113,7 @@ const updateDogData = () => {
         
       <h2>See Friends activities</h2>
       <form onSubmit={handleSubmit}>
-                <input type="text" value={id} onChange={handleInputChange} placeholder="Enter ID" />
+                <input type="text" value={id} onChange={handleInputChange} placeholder="Enter Friends ID" />
                 <button type="submit">Load his informations</button>
       </form>
       <div><h1>{FriendName}</h1></div>

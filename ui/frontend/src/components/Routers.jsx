@@ -9,6 +9,11 @@ import Feed from './Feed'
 import Friends from './Friends'
 import Test from './Test'
 import Post from './Post'
+import Auth from './Auth'
+import Login from './Login'
+import {Logout} from './Logout'
+import Register from './Register'
+import Primaryinfo from './PrimaryInfo'
 
 function Uapp(){
     return(
@@ -16,7 +21,7 @@ function Uapp(){
         <BrowserRouter>
          
             <Routes>
-                <Route  path='/' element={<Feed/>}/>
+                <Route  path='/Feed' element={<Feed/>}/>
                 <Route  path='/friends' element={<Friends_info/>}/>
                 <Route  path='/friendrequests' element={<Friend_requests/>}/>
                 <Route  path='/locals' element={<Locals/>}/>
@@ -24,7 +29,11 @@ function Uapp(){
                 {/* <Route  path='/yourconnections' element={<Friends/>}/> */}
                 <Route  path='/test' element={<Test/>}/>
                 <Route  path='/postWhatsinMind' element={<Post/>}/>
-                
+                {/* <Route  path='/' element={<Auth/>}/> */}
+                <Route  path='/login' element={<Login/>}/>
+                <Route path="/logout" element={<Logout/>}/>
+                <Route path="/register" element={<Register/>}/>
+                <Route path="/primaryinfo" element={<Primaryinfo/>}/>
             </Routes>
             
             

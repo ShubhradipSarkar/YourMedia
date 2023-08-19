@@ -1,39 +1,15 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from friends.models import User,Friends,Posts
+# from django.shortcuts import render
+# from django.http import HttpResponse
+from friends.models import User,Friends,Posts, Ids, FriendRequests
+from rest_framework.views import APIView
 from rest_framework import viewsets
-from friends.serializers import Userserializer,Friendserializer,Postsserializer
-
+from rest_framework.response import Response
+from friends.serializers import Userserializer,Friendserializer,Postsserializer,IdsSerializer ,FriendRequestserializer
+from rest_framework.exceptions import AuthenticationFailed
+import jwt
+import datetime
 import requests
-
-def update_user_coordinates(request):
-    address = request.POST.get('address')  # Assuming you have an address input field
-
-    # Make a request to the Google Maps Geocoding API
-    response = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?address={address}&key=YOUR_API_KEY')
-
-    if response.status_code == 200:
-        data = response.json()
-
-        if data['results']:
-            result = data['results'][0]
-            location = result['geometry']['location']
-
-            # Retrieve latitude and longitude
-            latitude = location['lat']
-            longitude = location['lng']
-
-            # Update the User object with the retrieved coordinates
-            user = User.objects.get(id=request.user.id)  # Assuming you have authenticated users
-            user.latitude = latitude
-            user.longitude = longitude
-            user.save()
-
-            return HttpResponse('Coordinates updated successfully.')
-
-    return HttpResponse('Unable to retrieve coordinates.')
-
-
+from rest_framework import status
 
 class UserViewSet(viewsets.ModelViewSet):
      
@@ -46,14 +22,60 @@ class FriendsViewSet(viewsets.ModelViewSet):
     queryset=Friends.objects.all()
     serializer_class=Friendserializer 
 
+class FriendRequestViewSet(APIView):
+
+    # queryset=FriendRequests.objects.all()
+    # serializer_class= FriendRequestserializer
+    def get(self, request, pk=None):
+        if pk is None:
+            instances = FriendRequests.objects.all()
+            serializer = FriendRequestserializer(instances, many=True)
+            return Response(serializer.data)
+        try:
+            instance = FriendRequests.objects.get(pk=pk)
+            serializer = FriendRequestserializer(instance)
+            return Response(serializer.data)
+        except FriendRequests.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+    def post(self, request):
+        serializer = FriendRequestserializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self, request, pk=None):
+        if pk is None:
+            FriendRequests.objects.all().delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        try:
+            instance = FriendRequests.objects.get(pk=pk)
+            instance.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except FriendRequests.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class SearchView(APIView):
+    
+
+    def get(self, request, request_to=None):
+        if request_to is None:
+            instances = FriendRequests.objects.all()
+        else:
+            instances = FriendRequests.objects.filter(request_to=request_to)
+        
+        serializer = FriendRequestserializer(instances, many=True)
+        return Response(serializer.data)
+
 class PostsViewSet(viewsets.ModelViewSet):
      
     queryset=Posts.objects.all()
     serializer_class=Postsserializer 
 
-def get_user_by_id(request, user_id):
+def get_user_by_id(request, myId):
     try:
-        man = User.objects.get(pk=user_id)
+        man = User.objects.get(pk=myId)
         data = {
             "user_name": man.user_name,
             "about": man.about,
@@ -63,17 +85,71 @@ def get_user_by_id(request, user_id):
         return JsonResponse(data)
     except User.DoesNotExist:
         return JsonResponse({"error": "man not found"}, status=404)
-        
-# def get_post_by_id(request, self_id):
-#     try:
-#         post = Posts.objects.get(pk=self_id)
-#         data = {
-            
-#             "user_name": post.user_name,
-#             "quote": post.quote,
-            
-#             # Add other fields as needed
-#         }
-#         return JsonResponse(data)
-#     except User.DoesNotExist:
-#         return JsonResponse({"error": "post not found"}, status=404)
+
+
+
+class RegisterView(APIView):
+    def post(self, request):
+        serializer=IdsSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+class LoginView(APIView):
+    def post(self, request):
+        email=request.data['email']
+        password=request.data['password']
+        user=Ids.objects.filter(email=email).first()
+        if user is None:
+            raise AuthenticationFailed('user not found')
+        if not user.check_password(password):
+            raise AuthenticationFailed('Incorrect Password')
+        payload={
+            'id':user.id,
+            'exp':datetime.datetime.utcnow()+datetime.timedelta(minutes=60),
+            'iat':datetime.datetime.utcnow()
+        }
+        token=jwt.encode(payload,'secret',algorithm='HS256')
+        response=Response()
+        response.set_cookie(key='jwt',value=token,httponly=True)
+        response.data={
+            'jwt':token
+        }
+        if not token:
+            raise AuthenticationFailed('Unauthenticated!')
+        try:
+            payload=jwt.decode(token, 'secret', algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed('Unauthenticated')
+        user=Ids.objects.filter(id=payload['id']).first()
+        serializer=IdsSerializer(user)
+        return Response(serializer.data)
+
+class UserView(APIView):
+    def get(self, request):
+        token=request.COOKIES.get('jwt')
+        print("token = ")
+        print(token)
+        response=Response()
+        response.data={
+            'jwt':token
+        }
+        if not token:
+            raise AuthenticationFailed('Unauthenticated!')
+        try:
+            payload=jwt.decode(token, 'secret', algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed('Unauthenticated')
+        user=Ids.objects.filter(id=payload['id']).first()
+        serializer=IdsSerializer(user)
+        return Response(serializer.data)
+
+class LogoutView(APIView):
+    def post(self, request):
+        response=Response()
+        response.delete_cookie('jwt')
+        response.data={
+            'message': 'logged out'
+        }
+        return response
+

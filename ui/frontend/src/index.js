@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Routers from './components/Routers';
+import './interceptor/axios';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

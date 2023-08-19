@@ -54,3 +54,11 @@
     border-radius: 10px;
     background-color: violet;
   }
+
+  .loginform{
+    display: flex;
+    flex-direction: column;
+
+    width: 500px;
+    height:20px;
+  }
