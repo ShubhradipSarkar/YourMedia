@@ -6,12 +6,12 @@ import './style.css'
 
 function Navbar1(){
   const name=localStorage.getItem('userName');
-
+  console.log(name);
     return(
         <>
         <Navbar bg="light" data-bs-theme="light">
         <Container>
-          <Navbar.Brand href="#home">Be Social</Navbar.Brand>
+          <Navbar.Brand href="#home">Yourmedia</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="Feed" className="nav">Feed</Nav.Link>
             <Nav.Link href="locals" className="nav">Locals</Nav.Link>
@@ -23,7 +23,9 @@ function Navbar1(){
             <Nav.Link href="postWhatsinMind" className="nav">Post Something</Nav.Link>
             <Nav.Link href="primaryinfo" className="nav">Update profile</Nav.Link>
             <Nav.Link href="logout" className="nav">Log out</Nav.Link>
-            <h3>{name}</h3>
+            <Nav.Link href="kola" className="nav"></Nav.Link>
+            <h2>{name}</h2>
+            
           </Nav>
         </Container>
       </Navbar>

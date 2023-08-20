@@ -1,18 +1,20 @@
 // src/components/ApiButton.js
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import Form from 'react-bootstrap/Form';
 const ApiButton = ({friendId,text}) => {
   const [selfId, setSelfId] = useState('');
   const [thoughts, setThoughts] = useState('');
   const [status, setStatus] = useState('');
   const myId=localStorage.getItem('userId');
+  const name=localStorage.getItem('userName');
 
   const handleApiCall = async () => {
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/v1/Posts/', {
         self_id: myId,
         quote: thoughts,
+        name: name,
       });
       setStatus('Posted successfully');
       console.log(response.data); // Handle the API response as needed
@@ -30,15 +32,19 @@ const ApiButton = ({friendId,text}) => {
         value={selfId}
         onChange={(e) => setSelfId(e.target.value)}
       /> */}
-      <input
-        type="text"
-        placeholder="Write something"
-        value={thoughts}
-        onChange={(e) => setThoughts(e.target.value)}
-      />
-      <button onClick={handleApiCall}>Post</button>
+      <div className='post'>
+      <Form>
+      <Form.Group className="mb-3" controlId="formGroupEmail">
+        
+        <Form.Control type="text" placeholder="Let your friends how you feel today" value={thoughts}
+        onChange={(e) => setThoughts(e.target.value)}/>
+      </Form.Group>
+      </Form>
+      <button onClick={handleApiCall} className='acceptbutton'>Post</button>
 
       {status && <p>{status}</p>}
+      </div>
+      
     </div>
   );
 };

@@ -5,7 +5,7 @@ import './style.css'
 
 const AcceptButton = ({deleteRequest, friendId, message}) => {
   const [selfId, setSelfId] = useState('');
-  const [errMsg, setErrMsg] = useState('');
+  const [errMsg, setErrMsg] = useState('Confirm Friend Request');
 //   const [friendId, setFriendId] = useState('');
   const myId=localStorage.getItem('userId');
   //console.log('myid = '+myId);
@@ -51,7 +51,7 @@ console.log(errMsg);
   return (
     <div>
       
-      <button onClick={handleApiCall}>Confirm Request</button>
+      <button onClick={handleApiCall} classNameme="acceptbutton">{errMsg}</button>
       <div className={errMsg === 'Friend Request Confirmed' ? 'green-success' : 'red-error'}>{errMsg}</div>
       
     </div>

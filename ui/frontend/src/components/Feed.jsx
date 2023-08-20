@@ -13,8 +13,10 @@ function Feed(){
     const [FriendName, setFriendName] = useState('');
     const myId=localStorage.getItem('userId')
     console.log('hur='+myId);
-    const handleSubmit = (event) => {
-      event.preventDefault();
+    
+    ///////////////////////////
+    useEffect(() => {
+      // event.preventDefault();
       const apiUrl = `http://127.0.0.1:8000/api/v1/Friends/`; // Replace 'your-api-url' with the actual API endpoint
       
       const apiUrl_posts='http://127.0.0.1:8000/api/v1/Posts/';
@@ -34,7 +36,11 @@ function Feed(){
       .catch(error => {
           console.error('Error:', error);
       });
-    };
+    }, []);
+    ///////////////////////////
+    // const handleSubmit = (event) => {
+      
+    // };
 
     const handleInputChange = (event) => {
         setShowElements(false);
@@ -103,15 +109,15 @@ function Feed(){
     return(
         <div>
             <Navbar1/>
-            <h3>Check current News Feed</h3>
+            {/* <h3>Check current News Feed</h3> */}
             {/* <form onSubmit={handleSubmit}>
                 <input type="text" value={id} onChange={handleInputChange} placeholder="Enter ID" />
                 <button type="submit">Load his informations</button>
             </form> */}
             
-            <form onSubmit={handleSubmit}>
+            <form >
                       {/* <input type="text" value={id} onChange={handleInputChange} placeholder="Enter ID to see post" /> */}
-                      <button type="submit">Load Posts</button>
+                      {/* <button type="submit">Load Posts</button> */}
             </form>
             {/* <button onClick={processKeys}>Process Names</button> */}
             <div className='postwidth'>
@@ -119,9 +125,11 @@ function Feed(){
                 <div key={jsonDataWithAges.id}>
                     <div className='msgwidth'>
 
-                        <p>{jsonDataWithAges.age}</p>
+                        <p>{jsonDataWithAges.name}</p>
                         
                         <h2>{jsonDataWithAges.quote}</h2>
+
+                        {/* <h2>{jsonDataWithAges.name}</h2> */}
                     </div>
                     
                 </div>

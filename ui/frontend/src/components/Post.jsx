@@ -7,8 +7,11 @@ function Post(){
 
         <div>
             <Navbar1/>
+            <center>
             <h1>Post What's In Your Mind</h1>
             <PostButton/>
+            </center>
+            
         </div>
     )
 }

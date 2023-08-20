@@ -10,12 +10,21 @@ import jwt
 import datetime
 import requests
 from rest_framework import status
+from django.shortcuts import render
 
 class UserViewSet(viewsets.ModelViewSet):
      
     queryset=User.objects.all()
     serializer_class=Userserializer 
     #serializer=Userserializer(queryset,many=True)
+
+def search_users(request):
+    query = request.GET.get('q')
+    if query:
+        users = User.objects.filter(Q(name__icontains=query))
+    else:
+        users = User.objects.all()
+    return render(request, 'search_results.html', {'users': users})
     
 class FriendsViewSet(viewsets.ModelViewSet):
      

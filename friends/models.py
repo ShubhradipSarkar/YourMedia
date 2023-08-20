@@ -19,6 +19,11 @@ class User(models.Model):
     city = models.CharField(max_length=100, default="city not set")
     college = models.CharField(max_length=100, default="college not provided")
     rltn=models.CharField(max_length=25, default="relationship status hidden")
+    class Meta:
+        unique_together = ('user_name', 'myId', 'digit')
+        constraints = [
+            models.CheckConstraint(check=models.Q(myId=models.F('digit')), name='equal_value')
+        ]
 
 class Friends(models.Model):
     self_id=models.IntegerField(null=True,blank=True)
@@ -45,6 +50,7 @@ class Posts(models.Model):
     
     self_id=models.IntegerField(null=True,blank=True)
     quote=models.CharField(max_length=500)
+    name=models.CharField(max_length=255, default="anonymous")
 
     
 

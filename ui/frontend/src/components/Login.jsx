@@ -22,12 +22,14 @@ const Login = () => {
         console.log(response.data);
         navigate('/primaryinfo');
         const userId = response.data.id;
+        const userName=response.data.name;
         console.log("current user id = "+ userId)
         // const res=axios.get(`http://127.0.0.1:8000/api/v1/Userss/${userId}/`);
         // console.log('the response:::');
         // console.log(res.data);
         // localStorage.setItem('userName', res.user_name);
       // Store the user ID in localStorage
+      localStorage.setItem('userName', userName);
       localStorage.setItem('userId', userId);
       
         //setResponseData(response.data);

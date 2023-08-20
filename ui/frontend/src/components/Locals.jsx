@@ -9,6 +9,9 @@ function Locals() {
   const userId = localStorage.getItem('userId');
   const [details, setDetails] = useState([]);
 
+  function func(){
+    console.log('div clicked');
+  }
   useEffect(() => {
     axios.get('http://127.0.0.1:8000/api/v1/Userss/')
       .then(res => {
@@ -23,10 +26,11 @@ function Locals() {
   return (
     <div>
         <Navbar1/>
-      <p>your user id/self id = {userId}</p>
+      {/* <p>your user id/self id = {userId}</p> */}
       <hr />
+      <div className='item-container'>
       {details.map((output, id) => (
-        <div key={id} className='people'>
+        <div key={id} className='people' onClick={func}>
           <div>
             <h2>{output.user_name}</h2>
             <h4>{output.about}</h4>
@@ -36,9 +40,11 @@ function Locals() {
             {/* <h4>{output.digit}</h4> */}
           </div>
           
-          <ApiButton friendId={output.digit}/>
+          <ApiButton friendId={output.digit} msg={"Friends already"}/>
         </div>
       ))}
+      </div>
+      
     </div>
   );
 }
