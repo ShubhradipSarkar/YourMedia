@@ -4,7 +4,8 @@ import axios from 'axios';
 import Navbar1 from './Navbar';
 import './style.css';
 import ApiButton from './ApiButton';
-
+import SearchComponent from './SearchComponent';
+import Profile from './Profile';
 const Test = () => {
 
 
@@ -110,59 +111,9 @@ const updateDogData = () => {
   return (
     <div>
         <Navbar1/>
+        <SearchComponent/>
         
-      <h2>See Friends activities</h2>
-      <form onSubmit={handleSubmit}>
-                <input type="text" value={id} onChange={handleInputChange} placeholder="Enter Friends ID" />
-                <button type="submit">Load his informations</button>
-      </form>
-      <div><h1>{FriendName}</h1></div>
-
       
-      <div className='AboutFriends'>
-        
-      <div >
-        
-      {/* <input type="text" value={dogId} onChange={(e) => setDogId(e.target.value)} /> */}
-      <center><button onClick={fetchDogData}>See his friend list</button></center>
-      <button onClick={updateDogData}>Enable adding</button>
-      { dogsData.length > 0 && (
-        <div>
-          {dogsData.map((dogData) => (
-            <div key={dogData.id} className='friendList'>
-              <h3>{dogData.user_name}</h3>
-              <p>about: {dogData.about}</p>
-              
-              
-              {/* <p>{dogData.id}</p> */}
-              {console.log('url = '+dogData.url)}
-              <ApiButton friendId={dogData.url-1}/>
-              {/* Add other fields as needed */}
-              <hr />
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-    <div className='PostList'>
-        <center><button onClick={handleShowElements}>See Posts</button></center>
-    
-    {showElements && (
-        <div className='postwidth'>
-          {filteredPosts.map((filteredPosts) => (
-            <div key={filteredPosts.id}>
-                <div className='msgwidth'>
-                    <p>{filteredPosts.self_id}</p>
-                    <h2>{filteredPosts.quote}</h2>
-                </div>
-                
-            </div>
-            
-          ))}
-        </div>
-      )}
-    </div>
-      </div>
     </div>
   );
 };

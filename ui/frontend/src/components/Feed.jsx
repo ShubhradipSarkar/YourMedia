@@ -1,7 +1,7 @@
 
 import React,{useEffect,useState} from "react"
 import Navbar1 from "./Navbar"
-
+import FaceIcon from "@mui/icons-material/Face";
 import axios from "axios";
 
 
@@ -125,7 +125,7 @@ function Feed(){
                 <div key={jsonDataWithAges.id}>
                     <div className='msgwidth'>
 
-                        <p>{jsonDataWithAges.name}</p>
+                        <p className="postname"><FaceIcon fontSize="large"/>{jsonDataWithAges.name}</p>
                         
                         <h2>{jsonDataWithAges.quote}</h2>
 

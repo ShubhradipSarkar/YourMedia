@@ -8,33 +8,31 @@ from friends.serializers import Userserializer,Friendserializer,Postsserializer,
 from rest_framework.exceptions import AuthenticationFailed
 import jwt
 import datetime
+from django.db.models import Q
 import requests
 from rest_framework import status
 from django.shortcuts import render
+from django.http import JsonResponse
+from rest_framework import filters
 
 class UserViewSet(viewsets.ModelViewSet):
      
+    search_fields = ['user_name','myId','city']
+    filter_backends = (filters.SearchFilter,)
     queryset=User.objects.all()
     serializer_class=Userserializer 
     #serializer=Userserializer(queryset,many=True)
 
-def search_users(request):
-    query = request.GET.get('q')
-    if query:
-        users = User.objects.filter(Q(name__icontains=query))
-    else:
-        users = User.objects.all()
-    return render(request, 'search_results.html', {'users': users})
     
 class FriendsViewSet(viewsets.ModelViewSet):
      
+    search_fields = ['self_id']
+    filter_backends = (filters.SearchFilter,)
     queryset=Friends.objects.all()
     serializer_class=Friendserializer 
 
 class FriendRequestViewSet(APIView):
 
-    # queryset=FriendRequests.objects.all()
-    # serializer_class= FriendRequestserializer
     def get(self, request, pk=None):
         if pk is None:
             instances = FriendRequests.objects.all()
@@ -67,7 +65,6 @@ class FriendRequestViewSet(APIView):
 
 class SearchView(APIView):
     
-
     def get(self, request, request_to=None):
         if request_to is None:
             instances = FriendRequests.objects.all()
@@ -79,6 +76,8 @@ class SearchView(APIView):
 
 class PostsViewSet(viewsets.ModelViewSet):
      
+    search_fields = ['self_id']
+    filter_backends = (filters.SearchFilter,)
     queryset=Posts.objects.all()
     serializer_class=Postsserializer 
 

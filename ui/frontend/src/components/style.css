@@ -33,18 +33,7 @@
     }
   }
   
-  .people{
-    
-    
-    border: 2px solid black;
-    padding: 5px;
-    margin: 5px;
-    border-radius: 5px;
-  }
-
-  .people:hover{
-    background-color: #f0f0f0;
-  }
+  
 
   .AboutFriends{
     display: flex;
@@ -74,9 +63,13 @@
   .postwidth{
     margin: 10px;
     padding: 10px;
-    border: 2px solid aqua;
+    
     border-radius: 10px;
-    background-color: aqua;
+    
+  }
+  .postname{
+    font-weight: 600;
+    font-family: cursive;
   }
 
   .msgwidth{
@@ -85,6 +78,18 @@
     border: 2px solid violet;
     border-radius: 10px;
     background-color: violet;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.7);
+  }
+  .people{
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: aquamarine;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.7);
+  }
+
+  .people:hover{
+    background-color: cyan;
   }
 
   .loginform{
@@ -113,6 +118,30 @@
     height: 50px;
     border-radius: 5px;
   }
+  .op{
+    background-color: #FF69B4;
+  }
+  .acceptbutton1{
+    background-color: rgb(247, 7, 175);
+    color: white;
+    box-sizing: border-box;
+    border-color: rgba(255, 0, 212, 0.856);
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
+    font-weight: 600;
+  }
+  .acceptbutton1:hover{
+    background-color: rgb(255, 7, 175);
+    color: whitesmoke;
+    box-sizing: border-box;
+    border-color: rgb(255, 3, 160 );
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
+    font-weight: 600;
+    
+  }
   .lebel{
     font-weight: 600;
   }
@@ -133,8 +162,69 @@
     display: flex;
     justify-content: center; /* Center horizontally */
     align-items: center;
+    color: rgb(19, 197, 197);
   }
   .post{
     width: 60%;
     margin: 10px;
+  }
+  .nameatnav{
+    position: absolute;
+    right: 10%;
+    margin: 5 px;
+    padding: 10px;
+    color: #f0f0f0;
+    background-color:skyblue;
+    border-radius: 10px;
+  }
+  .noreq{
+    margin: 20px;
+    padding: 20px;
+  }
+  .nav {
+    /* Define styles for normal icons here */
+    /* color: #999;
+    margin: 10px; */
+  }
+  
+  .nav.active {
+    /* Define styles for active icons here */
+    color: #FF69B4; /* Pink color */
+    /* You can adjust other styles, such as opacity, background color, etc. */
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Columns: fixed - scrollable - fixed */
+    grid-gap: 20px;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .column {
+    padding: 20px;
+    border: 1px solid #ccc;
+    overflow-y: auto; /* Enable vertical scroll */
+  }
+  
+  .fixed {
+    background-color: #f0f0f0;
+  }
+  
+  .scrollable {
+    background-color: white;
+  }
+  
+  .searchbar{
+    margin: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    width: 300px;
+    height: 50px;
+    border-color: blue;
+  }
+
+  .postpage{
+    margin-top: 50px;
   }

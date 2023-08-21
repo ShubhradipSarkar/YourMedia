@@ -1,7 +1,7 @@
 // src/components/ApiButton.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import './style.css'
+import Button from 'react-bootstrap/esm/Button';
 
 const AcceptButton = ({deleteRequest, friendId, message}) => {
   const [selfId, setSelfId] = useState('');
@@ -12,8 +12,9 @@ const AcceptButton = ({deleteRequest, friendId, message}) => {
   const SuccessMsg=message;
   console.log('delete delete delete = '+deleteRequest);
   console.log('the msg = '+SuccessMsg);
-console.log(errMsg);
+  console.log(errMsg);
   const handleApiCall = async () => {
+    
     try {
         if (!friendId) {
             setErrMsg('Could not add as friend'); // If friendId is null, set the error message to 'lol'
@@ -43,7 +44,10 @@ console.log(errMsg);
       setErrMsg('Could not add as friend')
     }
 
-    
+    setTimeout(() => {
+        console.log("Delayed action executed after 3 seconds");
+      }, 3000);
+    window.location.reload();
 
     
   };
@@ -51,7 +55,7 @@ console.log(errMsg);
   return (
     <div>
       
-      <button onClick={handleApiCall} classNameme="acceptbutton">{errMsg}</button>
+      <Button onClick={handleApiCall} >{errMsg}</Button>
       <div className={errMsg === 'Friend Request Confirmed' ? 'green-success' : 'red-error'}>{errMsg}</div>
       
     </div>

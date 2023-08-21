@@ -22,6 +22,7 @@ urlpatterns = [
     path('friendRequest/', FriendRequestViewSet.as_view(), name='FriendRequestViewSet'),
     path('friendRequest/<int:pk>/', FriendRequestViewSet.as_view(), name='friendAccepted'),
     path('SearchView/<int:request_to>/', SearchView.as_view(), name='SearchView'),
+    #path('search/', search_users.as_view(), name='search_users'),
     #path('Posts/<int:user_id>/', views.get_post_by_id, name='get_post_by_id'),
 ]
  

@@ -14,6 +14,7 @@ import Login from './Login'
 import {Logout} from './Logout'
 import Register from './Register'
 import Primaryinfo from './PrimaryInfo'
+import Profile from './Profile'
 
 function Uapp(){
     return(
@@ -34,6 +35,7 @@ function Uapp(){
                 <Route path="/logout" element={<Logout/>}/>
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/primaryinfo" element={<Primaryinfo/>}/>
+                <Route path="/profile" element={<Profile/>}/>
             </Routes>
             
             

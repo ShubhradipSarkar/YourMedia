@@ -8,7 +8,7 @@ function Post(){
         <div>
             <Navbar1/>
             <center>
-            <h1>Post What's In Your Mind</h1>
+            <h1 className='postpage'>Post What's In Your Mind</h1>
             <PostButton/>
             </center>
             
