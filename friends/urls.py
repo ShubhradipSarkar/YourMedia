@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from friends.views import UserViewSet,FriendsViewSet,PostsViewSet ,FriendRequestViewSet
+from friends.views import UserViewSet,FriendsViewSet,PostsViewSet ,FriendRequestViewSet, LikesViewSet
 from .views import RegisterView, LoginView, UserView, LogoutView, SearchView
 from rest_framework import routers
 from . import views
@@ -9,6 +9,7 @@ router=routers.DefaultRouter()
 router.register(r'Userss',UserViewSet)
 router.register(r'Friends',FriendsViewSet)
 router.register(r'Posts',PostsViewSet)
+router.register(r'Likes', LikesViewSet)
 
 #router.register(r'FriendRequests',FriendRequestViewSet)
 

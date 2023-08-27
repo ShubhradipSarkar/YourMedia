@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-
+import Form from "react-bootstrap/esm/Form";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -49,28 +49,29 @@ const Login = () => {
        
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Email:
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </label>
-      <br />
-      <label>
-        Password:
-        <input
-          type="text"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </label>
-      <br />
-      <button type="submit">Login</button>
-      <a href="register">Not registered yet? Register here</a>
-    </form>
+    <div className="loginpage">
+      
+
+    <div className='userbox'>
+    <Form className='form_primary' onSubmit={handleSubmit}>
+      <Form.Group className="mb-3" controlId="formGroupEmail">
+        <Form.Label className='lebel'>Email</Form.Label>
+        <Form.Control type="text" placeholder="Enter Registered Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formGroupPassword">
+        <Form.Label className='lebel'>Password</Form.Label>
+        <Form.Control type="text" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+      </Form.Group>
+      
+      <center><button type="submit" className='acceptbutton'>Login</button></center>
+      {/* <center><p>{succ}</p></center> */}
+      
+    </Form>
+    
+    </div>
+    <a href="register">Not registered yet? Register here</a>
+    </div>
+    
   );
 };
 

@@ -51,7 +51,19 @@ class Posts(models.Model):
     self_id=models.IntegerField(null=True,blank=True)
     quote=models.CharField(max_length=500)
     name=models.CharField(max_length=255, default="anonymous")
-
+    idkun=models.IntegerField(primary_key=True)
     
+    # def __str__(self):
+    #     return f"id: {self.id}, quote: {self.quote}, name: {self.name}"
+    
+class Likes(models.Model):
+    post_id=models.IntegerField()
+    liker_id=models.IntegerField()
+    
+    class Meta:
+        unique_together = ('post_id', 'liker_id')
+        # constraints = [
+        #     models.CheckConstraint(check=~models.Q(self_id=models.F('friend_id')), name='not_equa')
+        # ]
 
 

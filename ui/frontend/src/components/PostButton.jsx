@@ -18,6 +18,7 @@ const ApiButton = ({friendId,text}) => {
       });
       setStatus('Posted successfully');
       console.log(response.data); // Handle the API response as needed
+      window.location.reload();
     } catch (error) {
       console.error(error);
       setStatus('Failed to post');
@@ -36,7 +37,7 @@ const ApiButton = ({friendId,text}) => {
       <Form>
       <Form.Group className="mb-3" controlId="formGroupEmail">
         
-        <Form.Control type="text" placeholder="Let your friends how you feel today" value={thoughts}
+        <Form.Control type="text" placeholder="Let your friends how you feel today" className="postinput" value={thoughts}
         onChange={(e) => setThoughts(e.target.value)}/>
       </Form.Group>
       </Form>

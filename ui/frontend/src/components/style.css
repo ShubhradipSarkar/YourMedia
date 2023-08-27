@@ -118,6 +118,13 @@
     height: 50px;
     border-radius: 5px;
   }
+  .loginpage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+  }
   .op{
     background-color: #FF69B4;
   }
@@ -165,8 +172,8 @@
     color: rgb(19, 197, 197);
   }
   .post{
-    width: 60%;
-    margin: 10px;
+    width: 100%;
+    /* margin: 10px; */
   }
   .nameatnav{
     position: absolute;
@@ -195,13 +202,15 @@
 
   .layout {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* Columns: fixed - scrollable - fixed */
+    grid-template-columns: 0.6fr 1fr 0.5fr; /* Columns: fixed - scrollable - fixed */
     grid-gap: 20px;
     width: 100%;
     height: 100vh;
     overflow: hidden;
   }
-  
+  .postinput{
+    width: 80%;
+  }
   .column {
     padding: 20px;
     border: 1px solid #ccc;
@@ -228,3 +237,72 @@
   .postpage{
     margin-top: 50px;
   }
+
+  .likes{
+    background-color: cyan;
+    border-radius: 20px;
+    display: flex;
+    padding: 5px;
+    margin: 10px;
+  }
+
+
+
+
+
+
+
+  /* class Solution {
+    public:
+        int ans=INT_MIN; 
+        void f(vector<vector<int>>& grid, int i, int j, int num, int die, vector<vector<int>>& dp){
+    
+            if(i==grid.size()-1 && j==grid[0].size()-1){
+                num+=grid[i][j];
+                
+                die=min(die, num);
+                
+                ans=max(ans, die);
+    
+                return;
+            }
+            
+    
+            num+=grid[i][j];
+            
+            die=min(die, num);
+    
+            //cout<<i<<" "<<j<<endl;
+            // if(dp[i][j]!=INT_MIN) {
+            //     //cout<<i<<" "<<j<<endl;
+            //     // return;
+            // }
+            // else{
+                int k1=INT_MAX;
+                int k2=INT_MAX;
+    
+                if(i<grid.size()-1){
+                    k1=min(k1, f(grid, i+1, j, num, die, dp));
+                }
+                if(j<grid[0].size()-1){
+                    k2=min(k2, f(grid, i, j+1, num, die, dp));
+                }
+                return min(k1, k2);
+            
+    
+            
+        }
+        int calculateMinimumHP(vector<vector<int>>& grid) {
+            int init=grid[0][0];
+            int m=grid.size();
+            int n=grid[0].size();
+            vector<vector<int>>dp(m, vector<int>(n,INT_MIN));
+    
+            f( grid, 0, 0, 0, INT_MAX, dp);
+            for(auto i: dp){
+                for(auto j:i) cout<<j<<" ";
+                cout<<endl;
+            }
+            return max(1-ans,1);
+        }
+    }; */

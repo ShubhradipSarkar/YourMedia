@@ -3,7 +3,10 @@ import React,{useEffect,useState} from "react"
 import Navbar1 from "./Navbar"
 import FaceIcon from "@mui/icons-material/Face";
 import axios from "axios";
-
+import PostButton from "./PostButton";
+import ThumbUpTwoToneIcon from '@mui/icons-material/ThumbUpTwoTone';
+import ThumbDownOffAltTwoToneIcon from '@mui/icons-material/ThumbDownOffAltTwoTone';
+import MessageSharpIcon from '@mui/icons-material/MessageSharp';
 
 function Feed(){
     const [id, setId] = useState('');
@@ -11,6 +14,7 @@ function Feed(){
     const [posts, setPosts]=useState([]);
     const [showElements, setShowElements] = useState(false);
     const [FriendName, setFriendName] = useState('');
+    const [liker, SetLiker]=useState([]);
     const myId=localStorage.getItem('userId')
     console.log('hur='+myId);
     
@@ -36,12 +40,33 @@ function Feed(){
       .catch(error => {
           console.error('Error:', error);
       });
+
+      axios.get(`http://localhost:8000/api/v1/Likes/?search=${myId}`)
+      .then(res=>{
+          SetLiker(res.data);
+      })
     }, []);
     ///////////////////////////
     // const handleSubmit = (event) => {
       
     // };
+    const like=async(parameter)=>{
+      
+      const urlSegments = parameter.split("/");
+      const primaryKey = urlSegments[urlSegments.length - 2];
+      console.log('post id = ', primaryKey);
 
+      try{
+        const response = await axios.post("http://localhost:8000/api/v1/Likes/",{
+        "post_id":primaryKey,
+        "liker_id":myId,
+      }).then(console.log('liked'));
+      }
+      catch(error){
+        //console.log(error);
+      }
+      
+    };
     const handleInputChange = (event) => {
         setShowElements(false);
         id=myId;
@@ -49,12 +74,15 @@ function Feed(){
     };
     console.log("id is = "+id)
     let filteredData = responseData.filter(obj => obj.self_id === parseInt(myId)).map(obj=>obj.friend_id);
+    
     const FriendSet=new Set();
 
     for(const element of filteredData){
       FriendSet.add(element);
+      
     }
-    
+    FriendSet.add(parseInt(myId));
+    console.log(FriendSet)
     const filteredPosts = [];
 
     for (let i = posts.length - 1; i >= 0; i--) {
@@ -63,6 +91,8 @@ function Feed(){
         filteredPosts.push(entry);
       }
     }
+
+    //console.log(filteredPosts)
     const myMap = new Map();
 
     const callApiAndExtractName = async (key) => {
@@ -120,7 +150,12 @@ function Feed(){
                       {/* <button type="submit">Load Posts</button> */}
             </form>
             {/* <button onClick={processKeys}>Process Names</button> */}
-            <div className='postwidth'>
+            <div className="layout">
+              <div className="column fixed">
+              <PostButton/>
+              </div>
+              <div className="column scrollable">
+              <div className='postwidth'>
               {jsonDataWithAges.map((jsonDataWithAges) => (
                 <div key={jsonDataWithAges.id}>
                     <div className='msgwidth'>
@@ -128,6 +163,18 @@ function Feed(){
                         <p className="postname"><FaceIcon fontSize="large"/>{jsonDataWithAges.name}</p>
                         
                         <h2>{jsonDataWithAges.quote}</h2>
+                        {/* <h2>{jsonDataWithAges.url}</h2> */}
+                        <br />
+                        <div className="likes">
+                          {liker.length}
+                          <div className="likes" >
+                          <ThumbUpTwoToneIcon onClick={() => like(jsonDataWithAges.url)}/>
+                          </div>
+                          <div className="likes">
+                            <MessageSharpIcon/>
+                          </div>
+                          </div>
+                        
 
                         {/* <h2>{jsonDataWithAges.name}</h2> */}
                     </div>
@@ -136,6 +183,9 @@ function Feed(){
                 
               ))}
             </div>
+              </div>
+            </div>
+            
         </div>
     )
 }

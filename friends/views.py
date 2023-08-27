@@ -1,10 +1,10 @@
 # from django.shortcuts import render
 # from django.http import HttpResponse
-from friends.models import User,Friends,Posts, Ids, FriendRequests
+from friends.models import User,Friends,Posts, Ids, FriendRequests, Likes
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework.response import Response
-from friends.serializers import Userserializer,Friendserializer,Postsserializer,IdsSerializer ,FriendRequestserializer
+from friends.serializers import Userserializer,Friendserializer,Postsserializer,IdsSerializer ,FriendRequestserializer, Likesserializer
 from rest_framework.exceptions import AuthenticationFailed
 import jwt
 import datetime
@@ -30,6 +30,13 @@ class FriendsViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.SearchFilter,)
     queryset=Friends.objects.all()
     serializer_class=Friendserializer 
+
+class LikesViewSet(viewsets.ModelViewSet):
+     
+    search_fields = ['post_id']
+    filter_backends = (filters.SearchFilter,)
+    queryset=Likes.objects.all()
+    serializer_class=Likesserializer
 
 class FriendRequestViewSet(APIView):
 
@@ -80,6 +87,7 @@ class PostsViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.SearchFilter,)
     queryset=Posts.objects.all()
     serializer_class=Postsserializer 
+    # return Response(Postsserializer.data)
 
 def get_user_by_id(request, myId):
     try:

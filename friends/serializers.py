@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from friends.models import User,Friends,Posts, Ids , FriendRequests
+from friends.models import User,Friends,Posts, Ids , FriendRequests, Likes
 class Userserializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
@@ -21,6 +21,11 @@ class Postsserializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model=Posts
         fields='__all__'
+
+class Likesserializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model=Likes
+        fields="__all__"
 
 class IdsSerializer(serializers.ModelSerializer):
     class Meta:

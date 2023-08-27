@@ -152,10 +152,7 @@ function Profile(){
                             <div className='clickable-div' onClick={() => showDetail(output.digit)}>
                                 <h2>{output.name}</h2>
                                 <h4>{output.city}</h4>
-                                {/* <h4>{output.city}</h4>
-                                <h4>{output.college}</h4>
-                                <h4>{output.rltn}</h4> */}
-                                {/* <h4>{output.digit}</h4> */}
+                                
                             </div>
                             
                             <ApiButton friendId={output.digit} msg={"Friends already"}/>
