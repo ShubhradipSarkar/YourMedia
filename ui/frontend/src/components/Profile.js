@@ -13,20 +13,20 @@ import Button from "react-bootstrap/esm/Button";
 
 
 function Profile(){
-    const [query, setQuery] = useState('');
+    
     const [results, setResults] = useState([]);
     const [data, SetData]=useState([]);
     const [friends, SetFriends]=useState([]);
     const navigate=useNavigate();
     const ProfileId=localStorage.getItem('viewProfile');
-    const [prnd, Setprnd]=useState([[]]);
+    
     const [responses, setResponses]=useState([]);
-    let [friendIds,SetFriendIds]=[];
+    
     const [buttonClicked, setButtonClicked] = useState(false);
-    let flattenedNames;
+    
     const [flattenedData, setFlattenedData] = useState([]);
     // const navigate=useNavigate();
-    let show=0;
+    
 
     //console.log(ProfileId);
     function handleClick(){
@@ -62,11 +62,6 @@ function Profile(){
 
           setFlattenedData(extractedNames);
           
-        //   flattenedNames = extractedNames.flat();
-          
-        //   console.log('oh',flattenedNames);
-        //   console.log('show = ',show);
-          //console.log(responses);
     }
     useEffect(()=>{
         axios.get(`http://127.0.0.1:8000/api/v1/Userss/${ProfileId}/`)
@@ -77,7 +72,7 @@ function Profile(){
             //console.error(err);
           });
         
-        const name=localStorage.getItem('userName');
+        //const name=localStorage.getItem('userName');
         //console.log('profileid = ',ProfileId)
         axios.get(`http://127.0.0.1:8000/api/v1/Posts/?search=${ProfileId}`)
         .then(res=>{

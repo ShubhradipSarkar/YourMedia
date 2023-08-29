@@ -165,8 +165,16 @@
     
     /* padding: 20px; */
   }
+  .Logo{
+    font-size: 30 px;
+    font-weight: bold;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: darkslateblue;
+
+  }
   .userbox{
     display: flex;
+    flex-direction: column;
     justify-content: center; /* Center horizontally */
     align-items: center;
     color: rgb(19, 197, 197);
@@ -183,6 +191,7 @@
     color: #f0f0f0;
     background-color:skyblue;
     border-radius: 10px;
+    cursor: pointer;
   }
   .noreq{
     margin: 20px;

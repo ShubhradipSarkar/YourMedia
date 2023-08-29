@@ -14,6 +14,7 @@ from rest_framework import status
 from django.shortcuts import render
 from django.http import JsonResponse
 from rest_framework import filters
+from rest_framework import generics
 
 class UserViewSet(viewsets.ModelViewSet):
      
@@ -24,6 +25,10 @@ class UserViewSet(viewsets.ModelViewSet):
     #serializer=Userserializer(queryset,many=True)
 
     
+class UserUpdateView(generics.UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = Userserializer
+
 class FriendsViewSet(viewsets.ModelViewSet):
      
     search_fields = ['self_id']
@@ -83,7 +88,7 @@ class SearchView(APIView):
 
 class PostsViewSet(viewsets.ModelViewSet):
      
-    search_fields = ['self_id']
+    search_fields = ['=self_id']
     filter_backends = (filters.SearchFilter,)
     queryset=Posts.objects.all()
     serializer_class=Postsserializer 

@@ -3,32 +3,39 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import './style.css'
-import { Chip } from "@mui/material";
-import FaceIcon from "@mui/icons-material/Face";
+
 import IconButton from '@mui/material/IconButton';
 import HomeIcon from "@mui/icons-material/Home";
 import Diversity3Icon from '@mui/icons-material/Diversity3';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import PeopleIcon from '@mui/icons-material/People';
+
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import SendIcon from '@mui/icons-material/Send';
 import AssistantIcon from '@mui/icons-material/Assistant';
 import Tooltip from '@mui/material/Tooltip';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from "react-router-dom";
 
-import { useState } from "react";
 
 function Navbar1(){
+  const navigate=useNavigate();
   const name=localStorage.getItem('userName');
-  
+  const myId=localStorage.getItem('userId');
+
+  const showDetail = (value) => {
+    localStorage.setItem('viewProfile', value);
+    const data=localStorage.getItem('viewProfile');
+    console.log('Clicked with value:', data);
+    navigate('/profile');
+  };
   console.log(name);
     return(
         <>
         <Navbar bg="light" data-bs-theme="light">
         {/* <Chip icon={<FaceIcon />} label="Friend Requests" />   */}
         <Container>
-          <Navbar.Brand href="Feed">Yourmedia</Navbar.Brand>
+          <Navbar.Brand href="Feed" className="Logo" >Yourmedia</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="Feed"  >
               <Tooltip title="News Feed">
@@ -89,7 +96,7 @@ function Navbar1(){
               </Tooltip>
             </Nav.Link>
             <Nav.Link href="kola" className="nav"></Nav.Link>
-            <h2 className="nameatnav">{name}</h2>
+            <h2 className="nameatnav"  onClick={() => showDetail(myId)}>{name}</h2>
             
           </Nav>
         </Container>

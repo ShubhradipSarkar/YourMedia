@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from friends.views import UserViewSet,FriendsViewSet,PostsViewSet ,FriendRequestViewSet, LikesViewSet
-from .views import RegisterView, LoginView, UserView, LogoutView, SearchView
+from .views import RegisterView, LoginView, UserView, LogoutView, SearchView, UserUpdateView
 from rest_framework import routers
 from . import views
 
@@ -23,6 +23,8 @@ urlpatterns = [
     path('friendRequest/', FriendRequestViewSet.as_view(), name='FriendRequestViewSet'),
     path('friendRequest/<int:pk>/', FriendRequestViewSet.as_view(), name='friendAccepted'),
     path('SearchView/<int:request_to>/', SearchView.as_view(), name='SearchView'),
+    path('UserUpdate/<int:pk>/', UserUpdateView.as_view(), name='user-update'),
+    
     #path('search/', search_users.as_view(), name='search_users'),
     #path('Posts/<int:user_id>/', views.get_post_by_id, name='get_post_by_id'),
 ]
